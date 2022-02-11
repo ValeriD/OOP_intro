@@ -85,10 +85,7 @@ vector_t init(size_t capacity = 2);
  * 
  * @param v 
  */
-void destroy(vector_t& v){
-    delete [] v.data;
-}
-
+void destroy(vector_t& v);
 
 /**
  * @brief 
@@ -115,6 +112,7 @@ int main(int argc, char* argv[]){
     vector_t v1 = init(5); // -> Capacity = 5
     
     destroy(v);
+    destroy(v1);
     return 0;
 }
 
@@ -122,7 +120,7 @@ int main(int argc, char* argv[]){
 //Implementation
 ////////////////////////////////////////////////////////////////
 
-vector_t init(size_t capacity = 2){
+vector_t init(size_t capacity){
     vector_t v;
     v.data = new int[capacity];
     v.capacity = capacity;
