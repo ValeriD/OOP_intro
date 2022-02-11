@@ -74,7 +74,10 @@ typedef struct vector_t vector_t;
  * @param capacity with default value of 2
  * @return vector_t& - the newly created vector
  */
-vector_t& init(size_t capacity = 2);
+// FYI Относно въпросът: "Може ли да не връщаме референция, а да използваме копирането на структури?", отговорът е
+// да, може, но не е препоръчително. В случаят няма да има проблем, но ако искаме да копираме една структура и ползваме
+// обикновеното копиране, две структури ще имат пойнтъри към едни и същи данни. Помислете как това би счупило програмата.
+vector_t init(size_t capacity = 2);
 
 
 /**
@@ -119,7 +122,7 @@ int main(int argc, char* argv[]){
 //Implementation
 ////////////////////////////////////////////////////////////////
 
-vector_t& init(size_t capacity = 2){
+vector_t init(size_t capacity = 2){
     vector_t v;
     v.data = new int[capacity];
     v.capacity = capacity;
