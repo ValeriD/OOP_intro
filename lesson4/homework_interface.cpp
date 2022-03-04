@@ -127,6 +127,12 @@ public:
     Library& operator=(const Library& other){} //Write it if you want it is almost the same as the copy constructor
 
     /**
+     * @brief Get the Books Count
+     * 
+     * @return size_t 
+     */
+    size_t getBooksCount()const{}
+    /**
      * @brief Get a book at the provided index. Validate the index
      * 
      * @param index 
