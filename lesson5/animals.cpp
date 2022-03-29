@@ -2,6 +2,15 @@
 #include<cstring>
 using namespace std;
 
+char* strDup(const char* str){
+    int size = strlen(str);
+    char* res = new char[size+1];
+    
+    for(int i = 0; i <= size; i++){
+        res[i] = str[i];
+    }
+    return res;
+}
 
 class Animal{
     char* name;
@@ -17,7 +26,7 @@ public:
      */
     Animal(){
     }
-
+    
     /**
      * @brief Construct a new Animal object
      * 
@@ -31,7 +40,7 @@ public:
     {
         if(!name || !breed)return;
 
-        this->name = strdup(name);
+        this->name = strdup(name); //Allocates memory and copy the characters from name
         this->breed = strdup(breed);
     }
 
@@ -58,6 +67,7 @@ public:
         delete [] this->breed;
     }
 
+   
     /**
      * @brief Assign operator
      * 
@@ -101,11 +111,12 @@ class Zoo{
      * 
      */
     void resize(){
-        this->capacity *= capacity;
+        this->capacity *= 2;
         Animal* new_animals = new Animal[capacity];
         for(size_t i = 0; i < this->size; i++){
             new_animals[i] = this->animals[i];
         }
+
 
         delete [] this->animals;
         this->animals = new_animals;
@@ -134,6 +145,7 @@ public:
     :capacity(2), size(0), ticketPrice(ticketPrice)
     {
         if(!managerName || !address) return;
+
         this->managerName = strdup(managerName);
         this->address = strdup(address);
         this->animals = new Animal[capacity];
@@ -177,6 +189,10 @@ public:
         this->ticketPrice = other.ticketPrice;
         this->capacity = other.capacity;
         this->size = other.size;
+
+        delete [] this->animals;
+        delete [] this->address;
+        delete [] this->managerName;
         this->managerName = strdup(other.managerName);
         this->address = strdup(other.address);
         this->animals = new Animal[capacity];
@@ -237,11 +253,12 @@ public:
 
         for(size_t i = 0; i<this->size; i++){
             if(strcmp(animals[i].getName(), name) == 0){ //Find the animal
-                Animal temp = animals[i];
-                shiftLeft(i); 
-                this-size--;
-                other.addAnimal(temp);
-                return 0; // 0 becaouse success
+                if(other.addAnimal(animals[i]) != -1){
+                    shiftLeft(i); 
+                    this-size--;
+                    
+                    return 0; // 0 becaouse success
+                }
             }
         }
         return 1; // 1 because not found
@@ -249,6 +266,5 @@ public:
 
 };
 int main(int argc, char* argv[]){
-    
     return 0;
 }
