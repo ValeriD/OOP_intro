@@ -108,7 +108,7 @@ SCENARIO("Add ability to Player"){
     GIVEN("Player"){
         Ability a1("test1", 1000);
         Ability a2("test2", 10);
-        std::vector<Ability> abilities = {a1, a2};
+        std::vector<Ability> abilities = {a1};
         Player p("test", 100, 100, abilities);
 
 
